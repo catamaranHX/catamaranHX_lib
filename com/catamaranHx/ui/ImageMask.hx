@@ -123,7 +123,7 @@ import openfl.display.SimpleButton;
 	public function openMask(event:MouseEvent){
 		parent.setChildIndex(this, parent.numChildren-1);
 		untyped window.console.log(this); 
-		untyped _wtf = this;
+		untyped _mask = this;
 		Actuate.tween (_sprite_mask, 2, { height: this._stage.stageHeight, y:0 }, false).ease(Quad.easeOut);
 	}
 
