@@ -35,8 +35,9 @@ import openfl.display.SimpleButton;
 	var _bottomLeftStage:Point;
 	var _width:Float;
 	var _height:Float;
-	var _hasReachedBottom:Bool = false;
 	var _acc:Accelerometer = new Accelerometer();
+	var _isOpen:Bool = false;
+
 
 
 	@:dox(show)
@@ -121,7 +122,9 @@ import openfl.display.SimpleButton;
 
 	public function openMask(event:MouseEvent){
 		parent.setChildIndex(this, parent.numChildren-1);
-		Actuate.tween (_sprite_mask, 2, { height: this._stage.stageHeight, y:0}, false).ease(Quad.easeOut);
+		untyped window.console.log(this); 
+		untyped _wtf = this;
+		Actuate.tween (_sprite_mask, 2, { height: this._stage.stageHeight, y:0 }, false).ease(Quad.easeOut);
 	}
 
 	private function adjustTile(offset:Float, increase:Bool = true):Float{
@@ -137,7 +140,7 @@ import openfl.display.SimpleButton;
 	private function updateDevice(_update:Dynamic):Void{
 		var acceleration = _update.accelerationIncludingGravity;
 		updateTilePos(acceleration.y);
-			
+
 	}
 
 	public function updateTilePos(_y:Float){
@@ -147,7 +150,10 @@ import openfl.display.SimpleButton;
 				newY = adjustTile(offset);
 			}
 		//untyped console.log(this._image);	
-		Actuate.tween (this._image, 0.05, { y: newY, x:0 } );
+		if(!_isOpen){
+			Actuate.tween (this._image, 0.05, { y: newY } );
+		}
+		
 	}
 
 	// Event Handlers
