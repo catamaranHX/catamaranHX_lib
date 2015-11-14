@@ -37,7 +37,7 @@ import openfl.display.SimpleButton;
 	var _height:Float;
 	var _acc:Accelerometer = new Accelerometer();
 	var _isOpen:Bool = false;
-
+	var imgAni:Bool = true;
 
 
 	@:dox(show)
@@ -119,6 +119,7 @@ import openfl.display.SimpleButton;
 
 	public function openMask(event:MouseEvent){
 		if(!this._isOpen){
+			this.imgAni = false;
 			parent.setChildIndex(this, parent.numChildren-1);
 			Actuate.tween (this, 1, { y: 0, rotation:0 }).ease(Quad.easeOut).onComplete (
 				Actuate.tween (_sprite_mask, 2, { height: this._stage.stageHeight}, false).ease(Quad.easeOut).onComplete(
@@ -135,10 +136,13 @@ import openfl.display.SimpleButton;
 		if(this._isOpen == true){
 			this._isOpen = false;
 			Actuate.tween (this, 1, { y: _initY, rotation:_options.rotation }).ease(Quad.easeOut).onComplete (
-				Actuate.tween (_sprite_mask, 2, { height: this._height}, false).ease(Quad.easeOut)
+				Actuate.tween (_sprite_mask, 2, { height: this._height}, false).ease(Quad.easeOut).onComplete (
+					function(){
+						this.imgAni = true;
+					}
+				)
 			);
 		}
-		
 	}
 
 	private function adjustTile(offset:Float, increase:Bool = true):Float{
@@ -152,19 +156,20 @@ import openfl.display.SimpleButton;
 	} 
 
 	private function updateDevice(_update:Dynamic):Void{
-		var acceleration = _update.accelerationIncludingGravity;
-		updateTilePos(acceleration.y);
-
+			var acceleration = _update.accelerationIncludingGravity;
+			updateTilePos(acceleration.y);
 	}
 
 	public function updateTilePos(_y:Float){
-		var newY = 0.0;
-		var offset = _y * 2;
-			if(this._image.get_y() * 1.5  > (this._image.get_height() * -1)  && this._image.get_y() + offset < 0 ){
-				newY = adjustTile(offset);
+		if(this.imgAni){
+			var newY = 0.0;
+			var offset = _y * 2;
+				if(this._image.get_y() * 1.5  > (this._image.get_height() * -1)  && this._image.get_y() + offset < 0 ){
+					newY = adjustTile(offset);
+				}
+			if(!_isOpen){
+				Actuate.tween (this._image, 0.05, { y: newY } );
 			}
-		if(!_isOpen){
-			Actuate.tween (this._image, 0.05, { y: newY } );
 		}
 		
 	}
