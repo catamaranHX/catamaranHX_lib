@@ -24,7 +24,7 @@ import openfl.display.SimpleButton;
 
 
 @:expose('CATAMARAN.ImageMask') class ImageMask extends Sprite {
-	
+	public var _initY:Float;
 	var _sprite_mask:Sprite;
 	var _stage:Stage;
 	var _options:Dynamic = {x:0, y:0, rotation:-20};
@@ -78,8 +78,6 @@ import openfl.display.SimpleButton;
 		this._image = new Bitmap (bitmapData);
 		var imgMsk = new Sprite();
      	imgMsk.addChild(this._image);
-     	//imgMsk.rotation = (this._options.rotation * -1);
-     	//imgMsk.y = this._options.rotation;
      	addChild(imgMsk);
 		_sprite_mask = new Sprite();
 		_sprite_mask.graphics.beginFill(0x000000);
@@ -98,11 +96,10 @@ import openfl.display.SimpleButton;
 		imgSpr.graphics.endFill();
 		var bitmapData = Assets.getBitmapData ('assets/imgs/sc9bg1B.jpg');
 		var trsp = new Bitmap (bitmapData);
-		//trsp.width = this._height;
-		//trsp.height = this._width;
 		trsp.alpha = 0;
 		imgSpr.addChild(trsp);
 		imgSpr.addEventListener(MouseEvent.MOUSE_DOWN, openMask);
+		imgSpr.addEventListener(MouseEvent.MOUSE_DOWN, closeMask);
 		addChild(imgSpr);
 		
 	}
@@ -121,10 +118,27 @@ import openfl.display.SimpleButton;
 	}
 
 	public function openMask(event:MouseEvent){
-		parent.setChildIndex(this, parent.numChildren-1);
-		untyped window.console.log(this); 
-		untyped _mask = this;
-		Actuate.tween (_sprite_mask, 2, { height: this._stage.stageHeight, y:0 }, false).ease(Quad.easeOut);
+		if(!this._isOpen){
+			parent.setChildIndex(this, parent.numChildren-1);
+			Actuate.tween (this, 1, { y: 0, rotation:0 }).ease(Quad.easeOut).onComplete (
+				Actuate.tween (_sprite_mask, 2, { height: this._stage.stageHeight}, false).ease(Quad.easeOut).onComplete(
+					function(){
+						_isOpen = true;
+					}
+					
+				)
+			);
+		}
+	}
+
+	public function closeMask(event:MouseEvent){
+		if(this._isOpen == true){
+			this._isOpen = false;
+			Actuate.tween (this, 1, { y: _initY, rotation:_options.rotation }).ease(Quad.easeOut).onComplete (
+				Actuate.tween (_sprite_mask, 2, { height: this._height}, false).ease(Quad.easeOut)
+			);
+		}
+		
 	}
 
 	private function adjustTile(offset:Float, increase:Bool = true):Float{
@@ -149,7 +163,6 @@ import openfl.display.SimpleButton;
 			if(this._image.get_y() * 1.5  > (this._image.get_height() * -1)  && this._image.get_y() + offset < 0 ){
 				newY = adjustTile(offset);
 			}
-		//untyped console.log(this._image);	
 		if(!_isOpen){
 			Actuate.tween (this._image, 0.05, { y: newY } );
 		}
