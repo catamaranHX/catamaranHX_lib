@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="CatamaranHx" package="com.sample.catamaranhx" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="CatamaranHx"  preloader="Preloader" />
+	
+	<source path="Source" />
+	
+	<haxelib name="svg" />
+    <haxelib name="openfl" />
+    <haxelib name="actuate" />
+	<assets path="Assets" rename="assets" />
+
+	<!-- THIS IS NEEDED BY THE PRELOADER -->
+	<!-- Only HTML5 and FLASH use the preloader, not native -->
+	<assets path="assets/preloader" include="*" if="web" />
+	
+</project>
