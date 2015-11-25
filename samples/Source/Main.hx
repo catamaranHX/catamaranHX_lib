@@ -1,6 +1,6 @@
 package;
 
-import openfl.display.Sprite;
+import com.catamaranHx.utils.Interface;
 
 
 class Main extends Sprite {
@@ -11,9 +11,4 @@ class Main extends Sprite {
 		var _imgMsk = new ImageMaskSample(stage);
 		addChild(_imgMsk);
 	}
-
-	
-	
-	
-	
 }

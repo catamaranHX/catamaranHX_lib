@@ -1,21 +1,19 @@
 package com.catamaranHx.ui;
 
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
-import openfl.display.Sprite;
-import openfl.sensors.Accelerometer;
-import openfl.geom.Point;
-import openfl.Assets;
-import openfl.display.Stage;
-import openfl.events.MouseEvent;
-import openfl.events.Event;
+
+import com.catamaranHx.utils.Interface;
+
+
+#if !phaserJS
 import openfl.events.AccelerometerEvent;
+import openfl.sensors.Accelerometer;
 import motion.Actuate;
 import motion.easing.Quad;
 import openfl.text.Font;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import openfl.display.SimpleButton;
+#end
 
  /**
      ImageMask simple ui component to have an image masked.
@@ -98,8 +96,8 @@ import openfl.display.SimpleButton;
 		var trsp = new Bitmap (bitmapData);
 		trsp.alpha = 0;
 		imgSpr.addChild(trsp);
-		imgSpr.addEventListener(MouseEvent.MOUSE_DOWN, openMask);
-		imgSpr.addEventListener(MouseEvent.MOUSE_DOWN, closeMask);
+		imgSpr.addEventListener(Mouse.MOUSE_DOWN, openMask);
+		imgSpr.addEventListener(Mouse.MOUSE_DOWN, closeMask);
 		addChild(imgSpr);
 		
 	}
@@ -117,7 +115,7 @@ import openfl.display.SimpleButton;
 		
 	}
 
-	public function openMask(event:MouseEvent){
+	public function openMask(event:Mouse){
 		if(!this._isOpen){
 			this.imgAni = false;
 			parent.setChildIndex(this, parent.numChildren-1);
@@ -132,7 +130,7 @@ import openfl.display.SimpleButton;
 		}
 	}
 
-	public function closeMask(event:MouseEvent){
+	public function closeMask(event:Mouse){
 		if(this._isOpen == true){
 			this._isOpen = false;
 			Actuate.tween (this, 1, { y: _initY, rotation:_options.rotation }).ease(Quad.easeOut).onComplete (
@@ -190,7 +188,7 @@ import openfl.display.SimpleButton;
 
 	 
 	// called when the "down" button is clicked  
-	private function scrollDown(event:MouseEvent):Void 
+	private function scrollDown(event:Mouse):Void 
 	{ 
 	  updateTilePos((event.localY * 0.005)); 
 	} 

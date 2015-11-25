@@ -1,14 +1,7 @@
 package;
 
-import openfl.display.Sprite;
-import openfl.display.Stage;
-import openfl.events.Event;
-import openfl.events.MouseEvent;
+import com.catamaranHx.utils.Interface;
 import com.catamaranHx.ui.ImageMask;
-import openfl.text.Font;
-import openfl.text.TextField;
-import openfl.text.TextFormat;
-import openfl.Assets;
 
 class ImageMaskSample extends Sprite {
 	

@@ -1,0 +1,4 @@
+-cp .
+-cp ../source/
+-js main.js
+-main Main
