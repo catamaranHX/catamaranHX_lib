@@ -8,17 +8,20 @@ class ImageMaskSample extends Sprite {
 	var _sp:Array<Dynamic> = [];
 	var _rotation:Float = -20.0;
 	var _stage:Stage;
+	var _game:Dynamic = null;
 	var _imgString:Array<String> = ['assets/imgs/sc9bg1A.jpg', 'assets/imgs/sc9bg1B.jpg'];
 
-	public function new (stage:Stage) {
-		super ();
-		_stage = stage;
+	public function new (options:Dynamic) {
+		_stage = options.stage;
+		super();
 		this.setTileLoop();
 		this.setTileLoop();
 		this.setTileLoop();
 		this.setTileLoop();
 		untyped window._stage = this._stage;
-		addEventListener(Event.ENTER_FRAME, gameLoop);
+		#if !phaserJS
+		_stage.addEventListener(Event.ENTER_FRAME, gameLoop);
+		#end
 	}
 
 	public function setTileLoop(){

@@ -5,10 +5,10 @@ package com.catamaranHx.utils;
 #if phaserJS
 
 
-    typedef Sprite              = phaser.gameobjects.Sprite;
+    typedef Sprite              = phaser.pixi.display.DisplayObjectContainer;
     typedef BitmapData          = phaser.gameobjects.BitmapData;
     typedef Graphics       		= phaser.gameobjects.Graphics;
-    typedef Bitmap           	= phaser.gameobjects.Image;
+    typedef Bitmap           	= phaser.gameobjects.Sprite;
     //typedef Text      		= phaser.gameobjects.Text;
     typedef Stage            	= phaser.pixi.display.Stage;
     typedef DisplayObject       = phaser.pixi.display.DisplayObject;
