@@ -9,10 +9,12 @@ class ImageMaskSample extends Sprite {
 	var _rotation:Float = -20.0;
 	var _stage:Stage;
 	var _game:Dynamic = null;
-	var _imgString:Array<String> = ['assets/imgs/sc9bg1A.jpg', 'assets/imgs/sc9bg1B.jpg'];
+	var _imgString:Array<Dynamic>;
+
 
 	public function new (options:Dynamic) {
 		_stage = options.stage;
+		_imgString = options._imgString;
 		super();
 		this.setTileLoop();
 		this.setTileLoop();
@@ -30,7 +32,7 @@ class ImageMaskSample extends Sprite {
 		}
 	}
 
-	public function setUpTiles(img:String){
+	public function setUpTiles(img:Dynamic){
 		var sp = new ImageMask(this._stage, {x:0,y:0, image:img, text:'test', textX:((_rotation * 5 - 20)*-1 ), rotation:_rotation});
 		sp.rotation = this._rotation;
 		sp.x = sp.rotation * 5;

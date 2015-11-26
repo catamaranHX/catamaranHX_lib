@@ -7,11 +7,11 @@ function $extend(from, fields) {
 	return proto;
 }
 var ImageMaskSample = function(options) {
-	this._imgString = ["assets/imgs/sc9bg1A.jpg","assets/imgs/sc9bg1B.jpg"];
 	this._game = null;
 	this._rotation = -20.0;
 	this._sp = [];
 	this._stage = options.stage;
+	this._imgString = options._imgString;
 	PIXI.DisplayObjectContainer.call(this);
 	this.setTileLoop();
 	this.setTileLoop();
@@ -52,16 +52,24 @@ ImageMaskSample.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
 	}
 });
 var Main = function() {
-	window.game = new Phaser.Game(null,null,800,600,Phaser.CANVAS,null,null,"phaser");
+	this._imgString = [{ key : "sc9bg1A", asset : "assets/imgs/sc9bg1A.jpg"},{ key : "sc9bg1B", asset : "assets/imgs/sc9bg1B.jpg"}];
+	window.game = new Phaser.Game(800,600,Phaser.CANVAS,"phaser",{ preload : $bind(this,this.preload), create : $bind(this,this.create)});
 	PIXI.DisplayObjectContainer.call(this);
-	var _imgMsk = new ImageMaskSample({ stage : this.stage});
-	this.addChild(_imgMsk);
 };
 Main.main = function() {
 	new Main();
 };
 Main.__super__ = PIXI.DisplayObjectContainer;
 Main.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+	preload: function() {
+		window.game.load.image(this._imgString[0].key,this._imgString[0].asset);
+		window.game.load.image(this._imgString[1].key,this._imgString[1].asset);
+	}
+	,create: function() {
+		if(this.stage == null) this.stage = window.game;
+		var _imgMsk = new ImageMaskSample({ stage : this.stage, _imgString : this._imgString});
+		this.addChild(_imgMsk);
+	}
 });
 var com_catamaranHx_ui_ImageMask = $hx_exports.CATAMARAN.ImageMask = function(_stage,_options) {
 	this.imgAni = true;
@@ -78,7 +86,7 @@ com_catamaranHx_ui_ImageMask.prototype = $extend(PIXI.DisplayObjectContainer.pro
 	setUPTxt: function(_txt) {
 	}
 	,construct: function() {
-		this._image = com_catamaranHx_utils_ImageLoader.getImage(this._options.image,{ name : "mask"});
+		this._image = com_catamaranHx_utils_ImageLoader.getImage(this._options.image.asset,this._options.image.key);
 		var imgMsk = window.game.add.graphics(0,0);
 		imgMsk.beginFill(16777215);
 		imgMsk.drawRect(this._options.x,this._options.y,this._image.height / 10,this._stage.width * 1.5);
@@ -88,8 +96,9 @@ com_catamaranHx_ui_ImageMask.prototype = $extend(PIXI.DisplayObjectContainer.pro
 });
 var com_catamaranHx_utils_ImageLoader = function() { };
 com_catamaranHx_utils_ImageLoader.getImage = function(key,options) {
-	window.game.load.image(options.name,key);
 	return new Phaser.Sprite(window.game,0,0,options.name,0);
 };
+var $_, $fid = 0;
+function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);

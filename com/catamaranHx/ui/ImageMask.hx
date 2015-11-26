@@ -69,7 +69,7 @@ import openfl.text.TextFormat;
 	}
 	
 	private function construct ():Void {
-		this._image = ImageLoader.getImage(this._options.image, {name:'mask'});
+		this._image = ImageLoader.getImage(this._options.image.asset, this._options.image.key);
 		#if !phaserJS
 		var imgMsk = new Sprite();
      	imgMsk.addChild(this._image);
