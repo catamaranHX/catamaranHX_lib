@@ -72,7 +72,8 @@ import openfl.text.TextFormat;
 		this._image = ImageLoader.getImage(this._options.image.asset, this._options.image.key);
 		#if !phaserJS
 		var imgMsk = new Sprite();
-     	imgMsk.addChild(this._image);
+		imgMsk.addChild(this._image);
+		untyped console.log(this._image);
      	addChild(imgMsk);
 		_sprite_mask = new Sprite();
 		_sprite_mask.graphics.beginFill(0x000000);
@@ -81,15 +82,18 @@ import openfl.text.TextFormat;
 		_sprite_mask.graphics.drawRect(this._options.x, this._options.y,  this._width, this._height);
 		_sprite_mask.graphics.endFill();
 		addChild(_sprite_mask);
-		#else
-		var imgMsk = untyped window.game.add.graphics(0, 0);
-    	imgMsk.beginFill(0xffffff);
-    	imgMsk.drawRect(this._options.x, this._options.y, this._image.height / 10, this._stage.width * 1.5);
-		#end
 		imgMsk.mask = _sprite_mask;
-		var imgSpr = new Sprite();
+		#else
+		var _sprite_mask = untyped window.game.add.graphics(0, 0);
+    	_sprite_mask.beginFill(0xffffff);
+    	_sprite_mask.drawRect(this._options.x, this._options.y, this._image.height , this._image.width );
+		untyped var _sp = window.game.add.sprite(this._options.x, this._options.y,this._options.image.key);
+		untyped _sp.mask = _sprite_mask;
+		#end
+
 
 		#if !phaserJS
+		var imgSpr = new Sprite();
      	imgSpr.mouseChildren = true;
 		imgSpr.mouseEnabled = true;
 		imgSpr.buttonMode = true;
