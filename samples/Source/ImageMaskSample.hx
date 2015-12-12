@@ -20,10 +20,6 @@ class ImageMaskSample extends Sprite {
 		this.setTileLoop();
 		this.setTileLoop();
 		this.setTileLoop();
-		untyped window._stage = this._stage;
-		#if !phaserJS
-		_stage.addEventListener(Event.ENTER_FRAME, gameLoop);
-		#end
 	}
 
 	public function setTileLoop(){

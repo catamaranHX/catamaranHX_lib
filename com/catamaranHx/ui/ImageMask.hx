@@ -3,15 +3,10 @@ package com.catamaranHx.ui;
 
 import com.catamaranHx.utils.Interface;
 import com.catamaranHx.utils.ImageLoader;
-
-
-#if !phaserJS
-import motion.Actuate;
-import motion.easing.Quad;
 import openfl.text.Font;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
-#end
+
 
  /**
      ImageMask simple ui component to have an image masked.
@@ -44,20 +39,13 @@ import openfl.text.TextFormat;
 			this._options = _options;
 		}
 		super();
-		#if !phaserJS
 		initializeEvents();
-		#end
 		construct ();
-
-		
 		setUPTxt(this._options.text);
-	
-
 	}
 
 
 	private function setUPTxt(_txt:String){
-		#if !phaserJS
 		var format = new TextFormat (Assets.getFont("assets/fonts/OpenSansRegular.ttf").fontName, 30, 0xFFFFFF);
 		var textField = new TextField ();
         textField.defaultTextFormat = format;
@@ -65,12 +53,10 @@ import openfl.text.TextFormat;
         textField.y = 15;
 		textField.text = _txt;
 		addChild(textField);
-		#end
 	}
 	
 	private function construct ():Void {
 		this._image = ImageLoader.getImage(this._options.image.asset, this._options.image.key);
-		#if !phaserJS
 		var imgMsk = new Sprite();
 		imgMsk.addChild(this._image);
 		untyped console.log(this._image);
@@ -83,16 +69,6 @@ import openfl.text.TextFormat;
 		_sprite_mask.graphics.endFill();
 		addChild(_sprite_mask);
 		imgMsk.mask = _sprite_mask;
-		#else
-		var _sprite_mask = untyped window.game.add.graphics(0, 0);
-    	_sprite_mask.beginFill(0xffffff);
-    	_sprite_mask.drawRect(this._options.x, this._options.y, this._image.height , this._image.width );
-		untyped var _sp = window.game.add.sprite(this._options.x, this._options.y,this._options.image.key);
-		untyped _sp.mask = _sprite_mask;
-		#end
-
-
-		#if !phaserJS
 		var imgSpr = new Sprite();
      	imgSpr.mouseChildren = true;
 		imgSpr.mouseEnabled = true;
@@ -106,10 +82,9 @@ import openfl.text.TextFormat;
 		imgSpr.addEventListener(Mouse.MOUSE_DOWN, openMask);
 		imgSpr.addEventListener(Mouse.MOUSE_DOWN, closeMask);
 		addChild(imgSpr);
-		#end
 	}
 
-	#if !phaserJS
+
 	private function adjustTile(offset:Float, increase:Bool = true):Float{
 		var newY = 0.0;
 		if(increase){
@@ -213,7 +188,7 @@ import openfl.text.TextFormat;
 		this._bottomLeftStage = this.localToGlobal(new Point(this._width, 0));
 	}
  
-	#end
+
 
 	
 	

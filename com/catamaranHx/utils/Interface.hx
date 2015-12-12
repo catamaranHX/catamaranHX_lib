@@ -2,43 +2,44 @@ package com.catamaranHx.utils;
 
 // THIS UI LIBRARY WILL BE BUILT FOR OPENFL AND PHASERJS / PIXI
 
-#if phaserJS
+#if pixiJS
 
 
-    typedef Sprite              = phaser.pixi.display.DisplayObjectContainer;
-    typedef BitmapData          = phaser.gameobjects.BitmapData;
-    typedef Graphics       		= phaser.gameobjects.Graphics;
-    typedef Bitmap           	= phaser.gameobjects.Sprite;
+    typedef Sprite              = pixi.core.sprites.Sprite;
+    typedef BitmapData          = pixi.core.graphics.GraphicsData;
+    typedef Graphics       		= pixi.core.graphics.Graphics;
+    typedef Bitmap           	= pixi.core.textures.Texture;
     //typedef Text      		= phaser.gameobjects.Text;
-    typedef Stage            	= phaser.pixi.display.Stage;
-    typedef DisplayObject       = phaser.pixi.display.DisplayObject;
-    typedef MovieClip   		= phaser.pixi.display.MovieClip;
-    typedef Assets 				= phaser.pixi.loaders.AssetLoader;
-    //typedef Circle 			= phaser.geom.Circle;
-    //typedef Ellipse 			= phaser.geom.Ellipse;
+    typedef Stage            	= pixi.core.display.Container;
+    typedef DisplayObject       = pixi.core.display.DisplayObject;
+    typedef MovieClip   		= pixi.extras.MovieClip;
+    typedef Assets 				= pixi.loaders.ResourceLoader;
+    typedef Circle 			    = pixi.core.math.shapes.Circle;
+    //typedef Ellipse 			= pixi.core.math.shapes.Ellipse;
     //typedef Line		 		= phaser.geom.Line;
-    typedef Matrix		 		= phaser.geom.Matrix;
-    typedef Point		 		= phaser.geom.Point;
-    //typedef Polygon		 	= phaser.geom.Polygon;
-    typedef Rectangle 	 		= phaser.geom.Rectangle;
-   	//typedef RoundedRectangle 	= phaser.geom.RoundedRectangle;
-   	typedef Event				= phaser.gameobjects.components.Events;
+    typedef Matrix		 		= pixi.core.math.Matrix;
+    typedef Point		 		= pixi.core.math.Point;
+    typedef Polygon		 	    = pixi.core.math.shapes.Polygon;
+    typedef Rectangle 	 		= pixi.core.math.shapes.Rectangle;
+   	typedef RoundedRectangle 	= pixi.core.math.shapes.RoundedRectangle;
+   	/*typedef Event				= pixi.interaction.EventTarget;
+
    	typedef Mouse				= phaser.input.Mouse;
    	typedef Keyboard			= phaser.input.Keyboard;
    	typedef Touch				= phaser.input.Touch;
-   	typedef Gamepad				= phaser.input.Gamepad;
+   	typedef Gamepad				= phaser.input.Gamepad;*/
     
-    typedef Tween               = phaser.tween.Tween;
-    typedef EaseLinear          = phaser.tween.Easing.Linear;
-    typedef EaseQuartic         = phaser.tween.Easing.Quartic;
-    typedef EaseCubic           = phaser.tween.Easing.Cubic;
-    typedef EaseQuad            = phaser.tween.Easing.Quadratic;
-    typedef EaseSin             = phaser.tween.Easing.Sinusoidal;
-    typedef EaseExponential     = phaser.tween.Easing.Exponential;
-    //typedef EaseCircular        = Phaser.Easing.Circular;
-    typedef EaseElastic         = phaser.tween.Easing.Elastic;
-    typedef EaseBack            = phaser.tween.Easing.Back;
-    typedef EaseBounce          = phaser.tween.Easing.Bounce;
+    typedef Tween               = motion.Actuate;
+    typedef EaseLinear          = motion.easing.Linear;
+    typedef EaseQuartic         = motion.easing.Quart;
+    typedef EaseCubic           = motion.easing.Cubic;
+    typedef EaseQuad            = motion.easing.Quad;
+    typedef EaseSin             = motion.easing.Sine;
+    typedef EaseExponential     = motion.easing.Expo;
+    //typedef EaseCircular      = motion.easing.Circular;
+    typedef EaseElastic         = motion.easing.Elastic;
+    typedef EaseBack            = motion.easing.Back;
+    typedef EaseBounce          = motion.easing.Bounce;
 
 #else
     typedef Sprite              = openfl.display.Sprite;
@@ -55,7 +56,7 @@ package com.catamaranHx.utils;
     //typedef Line		 		= openfl.geom.Line;
     typedef Matrix		 		= openfl.geom.Matrix;
     typedef Point		 		= openfl.geom.Point;
-    //typedef Polygon		 	= openfl.geom.Polygon;
+    //typedef Polygon		 	    = openfl.geom.Polygon;
     typedef Rectangle 	 		= openfl.geom.Rectangle;
 	//typedef RoundedRectangle 	= openfl.geom.RoundedRectangle;
 	typedef Event 				= openfl.events.Event;
@@ -71,7 +72,7 @@ package com.catamaranHx.utils;
     typedef EaseQuad            = motion.easing.Quad;
     typedef EaseSin             = motion.easing.Sine;
     typedef EaseExponential     = motion.easing.Expo;
-    //typedef EaseCircular        = motion.easing.Circular;
+    //typedef EaseCircular      = motion.easing.Circular;
     typedef EaseElastic         = motion.easing.Elastic;
     typedef EaseBack            = motion.easing.Back;
     typedef EaseBounce          = motion.easing.Bounce;

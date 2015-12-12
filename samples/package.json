@@ -1,0 +1,35 @@
+{
+  "name": "catamaranhx",
+  "version": "1.0.0",
+  "description": "lightweight haxeGUI library",
+  "main": "source/Main.hx",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-shell": "^0.5.1",
+    "open": "0.0.5",
+    "path": "^0.12.7",
+    "run-sequence": "^1.1.5"
+  },
+  "scripts": {
+    "test": "openfl test html5 -Dwebgl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catamaranHX/catamaranHX_lib.git"
+  },
+  "keywords": [
+    "webgl",
+    "haxe",
+    "gui"
+  ],
+  "author": "Brendon Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/catamaranHX/catamaranHX_lib/issues"
+  },
+  "homepage": "https://github.com/catamaranHX/catamaranHX_lib#readme"
+}
