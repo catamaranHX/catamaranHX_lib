@@ -15,6 +15,7 @@ import openfl.text.TextFormat;
 
 
 @:expose('CATAMARAN.ImageMask') class ImageMask extends Sprite {
+
 	public var _initY:Float;
 	var _sprite_mask:Sprite;
 	var _stage:Stage;

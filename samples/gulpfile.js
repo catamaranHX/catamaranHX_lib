@@ -6,6 +6,7 @@ var shell = require('gulp-shell');
 var connect = require('gulp-connect');
 var open = require('open');
 
+
 gulp.task('connect', function() {
   console.log('Starting CatamaranHx');
   connect.server({
@@ -17,7 +18,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('restart', function() {
-	console.log('reload CatamaranHx');
+  console.log('reload CatamaranHx');
   connect.reload();
 });
 
@@ -39,4 +40,8 @@ gulp.task('watch', function (callback) {
 
 gulp.task('buildwatcher', shell.task([
     'openfl build html5 -Dwebgl'
+]));
+
+gulp.task('install_dep', shell.task([
+    'haxelib install openfl', 'haxelib -notimeout install swf', 'haxelib -notimeout install svg', 'haxelib -notimeout install actuate', 'haxelib -notimeout install actuate', 'haxelib -notimeout git catamaranhx https://github.com/catamaranHX/catamaranHX_lib.git'
 ]));
