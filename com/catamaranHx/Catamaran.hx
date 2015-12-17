@@ -1,6 +1,8 @@
 package com.catamaranHx;
 
-import com.catamaranHx.ui;
+import com.catamaranHx.ui.*;
+import com.catamaranHx.core.dom.DOM;
+import com.catamaranHx.core.events.Events;
 import openfl.display.*;
 
  /**
@@ -16,19 +18,22 @@ import openfl.display.*;
 	public var _mobileOS:String;
 	public var _stage:Stage;
 	public var _glFunc:Array<Dynamic>;
+    public var core:Dynamic = {};
 
 	@:dox(show)
-	public function new (_stage:Stage, ?_options:Dynamic) {
+	public function new (_stage:Stage = null, ?_options:Dynamic) {
 		this._stage = _stage;
-		addEventListener(Event.ENTER_FRAME, _gL);
-		trace("            `--.-+.        `--..--o.               \n           `.---+..``     `------o.               \n           `-.--+. .``.`:/.//:.--o.               \n           `----+ossoyyyyyys/.---o.               \n          ..:oyhysosssssoooooo/:-o.               \n        `.+sooossoo+oos-.:+++++oos:               \n           +ys++oo+++/++/--/ssyoohho-             \n            /yysoo+//+osys/..-/  ./sys/`          \n             -yyyo+oso/-`           ./sy+-        \n              `oyyy:`                  `/ss-      \n                :yys.                     `.      \n                 `oyy:                            \n                   -sy+`                          \n                     :so`                         \n                       -s`                        \n                                  CatamaranHX 0.01a by Brendon Smith http://bit.ly/CatamaranHX")
+        this.core.DOM = DOM;
+        this.core.Events = Events;
+		untyped addEventListener(Event.ENTER_FRAME, _gL);
+		trace("            `--.-+.        `--..--o.               \n           `.---+..``     `------o.               \n           `-.--+. .``.`:/.//:.--o.               \n           `----+ossoyyyyyys/.---o.               \n          ..:oyhysosssssoooooo/:-o.               \n        `.+sooossoo+oos-.:+++++oos:               \n           +ys++oo+++/++/--/ssyoohho-             \n            /yysoo+//+osys/..-/  ./sys/`          \n             -yyyo+oso/-`           ./sy+-        \n              `oyyy:`                  `/ss-      \n                :yys.                     `.      \n                 `oyy:                            \n                   -sy+`                          \n                     :so`                         \n                       -s`                        \n                                  CatamaranHX 0.01a by Brendon Smith http://bit.ly/CatamaranHX");
 
 	}
 	 /**
      catamaranHx this is the main game loop where most of the events will take place 
  	**/
 	@:dox(show)
-	private function _gL(event:Event):Void
+	private function _gL(event:Events):Void
 	{
 		for(i in 0..._glFunc.length){
 			try{
@@ -38,6 +43,11 @@ import openfl.display.*;
 			}
 		}
 	}
+
+
+    public static inline function isUndefined(value : Dynamic){
+        return untyped __js__('"undefined" === typeof value');
+    } 
 
 
 	#if html5
@@ -51,10 +61,10 @@ import openfl.display.*;
         }
         pl = parts.length;
         for (i in 0...pl) {
-            if (typeof parent[parts[i]] == 'undefined') {
-                parent[parts[i]] = {};
+            if (untyped __js__("typeof parent[parts[i]] == 'undefined'")) {
+                parent[untyped parts[i]] = {};
             }
-            parent = parent[parts[i]];
+            parent = untyped parent[parts[i]];
         }
         return parent;
     }
@@ -68,23 +78,23 @@ import openfl.display.*;
     }
 
     function isMobile():Void {
-        switch (true) {
-            case /Android/i.test(navigator.userAgent):
+         untyped __js__("switch (true) {
+            case  /Android/i.test(navigator.userAgent):
                 this._mobileOS = 'android';
                 return true;
             case /webOS/i.test(navigator.userAgent):
                 this._mobileOS = 'webos';
                 return true;
-            case /iPhone/i.test(navigator.userAgent):
+            case   /iPhone/i.test(navigator.userAgent):
                 this._mobileOS = 'iphone';
                 return true;
-            case /iPad/i.test(navigator.userAgent):
+            case  /iPad/i.test(navigator.userAgent):
                 this._mobileOS = 'ipad';
                 return true;
             case /iPod/i.test(navigator.userAgent):
                 this._mobileOS = 'ipod';
                 return true;
-            case /BlackBerry/i.test(navigator.userAgent):
+            case  /BlackBerry/i.test(navigator.userAgent):
                 this._mobileOS = 'blackberry';
                 return true;
             case /Windows Phone/i.test(navigator.userAgent):
@@ -92,10 +102,10 @@ import openfl.display.*;
                 return true;
             default:
                 return false;
-        }
+        }");
     }
 
-	#enif
+	#end
 	
 	
 }

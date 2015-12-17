@@ -43,5 +43,12 @@ gulp.task('buildwatcher', shell.task([
 ]));
 
 gulp.task('install_dep', shell.task([
-    'haxelib install openfl', 'haxelib -notimeout install swf', 'haxelib -notimeout install svg', 'haxelib -notimeout install actuate', 'haxelib -notimeout install actuate', 'haxelib -notimeout git catamaranhx https://github.com/catamaranHX/catamaranHX_lib.git'
+    'haxelib install dox',
+    'haxelib install openfl', 
+    'haxelib -notimeout install swf', 
+    'haxelib -notimeout install svg', 
+    'haxelib -notimeout install actuate', 
+    'haxelib -notimeout install actuate', 
+    'haxelib -notimeout git pv3d https://github.com/seacloud9/pv3dHx.git',
+    'haxelib -notimeout git catamaranhx https://github.com/catamaranHX/catamaranHX_lib.git'
 ]));

@@ -9,15 +9,15 @@ import js.html.Document;
 
 
 @:expose('CATAMARAN.Dom')  class DOM {
-	private var elements:Array<Dynamic>;
+	  private var elements:Array<Dynamic>;
     private var length:Int;
 
 	@:dox(show)
 	public function new (selector:Dynamic) {
-		elements = cast(Document.querySelectorAll(selector));
+		elements = cast(untyped document.querySelectorAll(selector));
         length = elements.length;
         for(i in 0...elements.length){
-            elements[i] = reflect.copy(this);
+            elements[i] = Reflect.copy(this);
         }
 	}
 
@@ -29,13 +29,13 @@ import js.html.Document;
 	
     public function  hide() {
         return this.each(function() {
-            this.style.display = 'none';
+            untyped this.style.display = 'none';
         });
     }
 
      public function show() {
         return this.each(function() {
-            this.style.display = 'block';
+            untyped this.style.display = 'block';
         });
     }
 
@@ -45,13 +45,13 @@ import js.html.Document;
     
     public function onVisible(callback:Dynamic) {
         return this.each(function() {
-            if (CATAMARAN.core.DOM.isVisible(this)) {
+            if (untyped __js__("CATAMARAN.core.DOM.isVisible(this)")) {
                 callback.call(this);
             } else {
-                var timer = setInterval(function() {
-                    if (CATAMARAN.core.DOM.isVisible(this)) {
+                var timer = untyped setInterval(function() {
+                    if (untyped __js__("CATAMARAN.core.DOM.isVisible(this)")) {
                         callback.call(this);
-                        clearInterval(timer);
+                        untyped clearInterval(timer);
                     }
                 }, 50);
             }
@@ -61,68 +61,67 @@ import js.html.Document;
 
     public function addClass( className:String ) {
         return this.each(function() {
-            this.classList.add(className);
+            untyped this.classList.add(className);
         });
     }
     
     public function removeClass( className:String ) {
         return this.each(function() {
-            this.classList.remove(className);
+            untyped this.classList.remove(className);
         });
     }
 
     public function hasClass( className:String ) {
-        return this[0].classList.contains(className);
+        return untyped this[0].classList.contains(className);
     }
 
     public function toggle(className:String){
-      var self = this;
-      return this.each(function() {
-            if(this.classList.contains(className)){
-              self.removeClass(className);
+      return untyped this.each.apply(this, [function() {
+            if(untyped this.classList.contains(className)){
+              this.removeClass(className);
             }else{
-              self.addClass(className);
+              this.addClass(className);
             }
-        });
+        }]);
     }
     
     public function on( event:Dynamic, callback:Dynamic ) {
         return this.each(function() {
-            this.addEventListener(event, callback, false);
+            untyped this.addEventListener(event, callback, false);
         });
     }
     
     public function off( event:Dynamic, callback:Dynamic ) {
         return this.each(function() {
-            this.removeEventListener(event, callback, false);
+            untyped this.removeEventListener(event, callback, false);
         });
     }
 
     public function width(w:Dynamic = null){
       var _w = w;
       if(_w == null){
-            return this[0].offsetWidth;
+            return untyped this[0].offsetWidth;
       }
       return this.each(function() {
-            this.style.width = _w;
+            untyped this.style.width = _w;
         });
     }
 
     public function height(h:Dynamic = null){
       var _h = h;
       if(_h == null){
-           return this[0].offsetHeight;
+           return untyped this[0].offsetHeight;
       }
       return this.each(function() {
-          this.style.height = _h;
+          untyped this.style.height = _h;
         });
     }
 
     public function css( obj:Dynamic ) {
         var _obj = obj;
         return this.each(function() {
-          for(var item in _obj){
-            this.style[item] = _obj[item];
+          for(item in 0..._obj){
+            untyped this.style[item] = _obj[item];
           }
         });
     }
