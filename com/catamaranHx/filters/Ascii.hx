@@ -1,7 +1,8 @@
+package com.catamaranHx.filters;
 
 import openfl.display.Shader;
 
-class Ascii extends Shader {
+@:expose('CATAMARAN.filters.Ascii') class Ascii extends Shader {
 
 	@fragment var fragment = [
 		"uniform vec4 dimensions;" ,

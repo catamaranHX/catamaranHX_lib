@@ -1,7 +1,8 @@
+package com.catamaranHx.filters;
 
 import openfl.display.Shader;
 
-class DotScreen extends Shader {
+@:expose('CATAMARAN.filters.DotScreen') class DotScreen extends Shader {
 
 	@fragment var fragment = [
 		"uniform vec4 dimensions;" ,

@@ -1,7 +1,8 @@
+package com.catamaranHx.filters;
 
 import openfl.display.Shader;
 
-class PixelateShader extends Shader {
+@:expose('CATAMARAN.filters.PixelateShader') class PixelateShader extends Shader {
 
 	@fragment var fragment = [
 

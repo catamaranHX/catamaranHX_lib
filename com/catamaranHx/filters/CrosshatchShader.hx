@@ -1,7 +1,8 @@
+package com.catamaranHx.filters;
 
 import openfl.display.Shader;
 
-class CrosshatchShader extends Shader {
+@:expose('CATAMARAN.filters.CrosshatchShader') class CrosshatchShader extends Shader {
 
 	@fragment var fragment = [
 		"void main(void)" ,
