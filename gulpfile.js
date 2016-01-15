@@ -48,7 +48,7 @@ gulp.task('install_dep', shell.task([
     'sudo haxelib -notimeout install swf', 
     'sudo haxelib -notimeout install svg', 
     'sudo haxelib -notimeout install actuate', 
-    'sudo haxelib -notimeout install actuate', 
-    'sudo haxelib -notimeout git pv3d https://github.com/seacloud9/pv3dHx.git',
+    'sudo haxelib -notimeout install flixel', 
+    'sudo haxelib -notimeout install kha', 
     'sudo haxelib -notimeout git catamaranhx https://github.com/catamaranHX/catamaranHX_lib.git'
 ]));
