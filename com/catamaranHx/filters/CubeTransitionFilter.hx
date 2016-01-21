@@ -7,12 +7,14 @@ import openfl.Lib;
 import openfl.filters.*;
 import openfl.events.*;
 
-@:expose('CATAMARAN.filters.CubeTransitionFilter') class  CubeTransitionFilter extends ShaderFilter {
+@:expose('CATAMARAN.filters.CubeTransitionFilter')  class  CubeTransitionFilter extends ShaderFilter {
 		public var _progressInc:Float = 1.0;
 		public var _container:Sprite;
 		public var _startInc = 1;
 		public var _prevInc = 0;
 		private var _imgArr:Array<String>; 
+		private var _afterCallback:Array<Dynamic> = []; 
+		private var _callbackInc = 0;
 		public var _reset:Bool;
 		public var _progress= new GLShaderParameter("float");
 		public var _persp:GLShaderParameter = new GLShaderParameter("float");
@@ -128,6 +130,10 @@ import openfl.events.*;
 					}
 					resetCube(_imgArr[_startInc],_imgArr[(_prevInc)], reset);
 					_prevInc = _startInc;
+					if(_afterCallback.length > 0 && _callbackInc < _afterCallback.length){
+		        		_afterCallback[_callbackInc]();
+		        		_callbackInc++;
+	        		}
 				}
 				
 			}
@@ -137,7 +143,7 @@ import openfl.events.*;
 
 }
 
-@:expose('CATAMARAN.filters.CubeTransition') class CubeTransition2 extends Shader {
+@:expose('CATAMARAN.filters.CubeTransition2') class CubeTransition2 extends Shader {
 	//http://transitions.glsl.io/transition/ee15128c2b87d0e74dee
 
 	@fragment var fragment = [
